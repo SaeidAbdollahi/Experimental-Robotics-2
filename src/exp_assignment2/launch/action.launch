@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <param name="des_pos_x" value= "0.0" />
+  <param name="des_pos_y" value= "1.0" />
+  <node pkg="exp_assignment2" type="wall_follow_service.py" name="wall_follower" />
+  <node pkg="exp_assignment2" type="go_to_point_service.py" name="go_to_point"  />
+  <node pkg="exp_assignment2" type="bug_as.py" name="bug_action_service" output="screen" />
+
+  <node name="findMarkerAction" pkg="exp_assignment2" type="findMarkerAction.py" respawn="false" output="screen"></node>
+</launch>

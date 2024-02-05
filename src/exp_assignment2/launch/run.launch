@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<launch>
+    <include file="$(find exp_assignment2)/launch/plan.launch"></include>
+    <include file="$(find exp_assignment2)/launch/action.launch"></include>
+	<include file="$(find exp_assignment2)/launch/sim.launch"></include>
+</launch>

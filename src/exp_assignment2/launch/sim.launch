@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+  <!-- these are the arguments you can pass this launch file, for example paused:=true -->
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="extra_gazebo_args" default=""/>
+  <arg name="gui" default="true"/>
+  <arg name="recording" default="false"/>
+  <arg name="world" default="assignment2" />
+  <arg name="world_name" value="$(find exp_assignment2)/worlds/$(arg world).world"/>
+  <arg name="markerSize"      default="0.05"/>    <!-- in m -->
+  <arg name="side"             default="left"/>
+  <arg name="ref_frame"       default="base"/>  <!-- leave empty and the pose will be published wrt param parent_name -->
+
+
+  <!-- Note that 'headless' is currently non-functional.  See gazebo_ros_pkgs issue #491 (-r arg does not disable
+       rendering, but instead enables recording). The arg definition has been left here to prevent breaking downstream
+       launch files, but it does nothing. -->
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+  <arg name="physics" default="ode"/>
+  <arg name="verbose" default="false"/>
+  <arg name="respawn_gazebo" default="false"/>
+  <arg name="use_clock_frequency" default="false"/>
+  <arg name="pub_clock_frequency" default="100"/>
+
+  <!-- set use_sim_time flag -->
+  <param name="/use_sim_time" value="$(arg use_sim_time)"/>
+
+  <!-- set command arguments -->
+  <arg unless="$(arg paused)" name="command_arg1" value=""/>
+  <arg     if="$(arg paused)" name="command_arg1" value="-u"/>
+  <arg unless="$(arg recording)" name="command_arg2" value=""/>
+  <arg     if="$(arg recording)" name="command_arg2" value="-r"/>
+  <arg unless="$(arg verbose)" name="command_arg3" value=""/>
+  <arg     if="$(arg verbose)" name="command_arg3" value="--verbose"/>
+  <arg unless="$(arg debug)" name="script_type" value="gzserver"/>
+  <arg     if="$(arg debug)" name="script_type" value="debug"/>
+
+  
+  <!-- start gazebo server-->
+  <group if="$(arg use_clock_frequency)">
+    <param name="gazebo/pub_clock_frequency" value="$(arg pub_clock_frequency)" />
+  </group>
+  <node name="gazebo" pkg="gazebo_ros" type="$(arg script_type)" respawn="$(arg respawn_gazebo)" output="screen"
+	args="$(arg command_arg1) $(arg command_arg2) $(arg command_arg3) -e $(arg physics) $(arg extra_gazebo_args) $(arg world_name)" />
+	
+  <!-- start gazebo client -->
+  <group if="$(arg gui)">
+    <node name="gazebo_gui" pkg="gazebo_ros" type="gzclient" respawn="false" output="screen"/>
+  </group>
+
+  <!-- load the controller configuration-->
+  <rosparam command="load" file="$(find exp_assignment2)config/joint_state_controller.yaml" />
+
+  <!-- run the joint_state_controller_spawner-->
+  <node name="joint_state_controller_spawner" pkg="controller_manager" type="spawner" output="screen" args="joint_state_controller" />
+
+  <!-- run the robot_state_publisher and joint_state_controller_spawner-->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+  
+  <!-- load the robot's model-->
+  <param name="robot_description" command="$(find xacro)/xacro '$(find rosbot_description)/urdf/rosbot.xacro'"/>
+
+  <!-- spawn the mofel into the world-->
+  <node name="rosbot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" args="-urdf -param robot_description -model rosbot -x 0.0 -y 1.0 -z 0.05" />
+
+  <!-- run the rviz -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find exp_assignment2)/rviz/rosbot.rviz" required="true" output="screen"/>
+
+  <!-- Launch the Aruco marker detection node -->
+  <node name="aruco_marker_publisher" pkg="exp_assignment2" type="markerPublisher" respawn="false" output="screen">
+  <!-- Remap the image topic to the camera's color image raw data -->
+      <remap from="/image" to="/camera/color/image_raw"/>
+  </node>
+
+  <!-- Launch a node for displaying the image from the robot's camera -->
+  <node pkg="image_view" type="image_view" name="image_view" output="screen">
+    <!-- Remap the image topic to the result published by the Aruco marker publisher -->
+    <remap from="image" to="aruco_marker_publisher/result"/>
+    <!-- Set the 'autosize' parameter to automatically adjust the window size -->
+    <param name="autosize" value="true"/>
+  </node>
+</launch>
