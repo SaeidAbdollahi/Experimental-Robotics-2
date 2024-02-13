@@ -348,7 +348,7 @@ After successfully completing all the preceding steps, we conducted the final te
 <img src="https://user-images.githubusercontent.com/80394968/225424488-9f446459-4e68-4971-8d33-381fbbbbcf50.png" width="35" /> Video
 =============
 ▶ Click to watch the video:
-[![1](./resources/preview2)](https://youtu.be/9APw2E8lbek "real test")
+[![1](./resources/preview)](https://youtu.be/9APw2E8lbek "real test")
 
 <a name="PART-5-The-Suggestion-for-Improvment"></a>
 ## PART 5-Suggestions for Improvment
