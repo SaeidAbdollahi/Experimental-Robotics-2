@@ -322,7 +322,7 @@ Upon initiating all the necessary nodes, the planner endeavors to solve the prob
 <img src="https://user-images.githubusercontent.com/80394968/225424488-9f446459-4e68-4971-8d33-381fbbbbcf50.png" width="35" /> Video
 =============
 ▶ Click to watch the video:
-[![1](./resources/preview)](https://youtu.be/xeEflY8YUeM "real test")
+[![1](./resources/preview.jpg)](https://youtu.be/xeEflY8YUeM "real test")
 
 <a name="PART-4-The-Real-Implementation-on-Rosbot2-Robot"></a>
 ## PART 4-The Real Implementation on Rosbot2 Robot
@@ -348,7 +348,7 @@ After successfully completing all the preceding steps, we conducted the final te
 <img src="https://user-images.githubusercontent.com/80394968/225424488-9f446459-4e68-4971-8d33-381fbbbbcf50.png" width="35" /> Video
 =============
 ▶ Click to watch the video:
-[![1](./resources/preview)](https://youtu.be/9APw2E8lbek "real test")
+[![1](./resources/preview2.jpg)](https://youtu.be/9APw2E8lbek "real test")
 
 <a name="PART-5-The-Suggestion-for-Improvment"></a>
 ## PART 5-Suggestions for Improvment
