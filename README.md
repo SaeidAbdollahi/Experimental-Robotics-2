@@ -1,5 +1,5 @@
 # Exprimental Robotics Course-Assignmet 2
-
+ 
 In the second assignment of the Experimental Robotics course within the Robotics Engineering program at the University of Genoa, our focus shifted from manually defining task order and logic, as was done in assignment 1, to employing the ROSPlan package for automating the process. This transition enabled us to streamline the execution of tasks by utilizing PDDL (Planning Domain Definition Language) planners integrated into the ROSPlan package.
 
 The assignment began with a comprehensive exploration of how to articulate the world and problem instances through the creation of .domain and .problem files. These files served as the foundation for the subsequent application of the ROSPlan PDDL planner. By leveraging this planner, we were able to systematically generate a sequence of actions that, when executed, would transition the initial state of the world to a desired goal state.
