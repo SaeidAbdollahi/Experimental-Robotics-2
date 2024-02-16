@@ -354,7 +354,7 @@ After successfully completing all the preceding steps, we conducted the final te
 ## PART 5-Suggestions for Improvment
 
  <a name="Navigation-Algorithm-Improvement"></a>
-- **Navigation Algorithm Improvement:** Instead of relying on a straightforward navigation algorithm like BUG0, exploring alternatives such as SLAM (Simultaneous Localization and Mapping) could significantly enhance our robot's capabilities. SLAM enables the creation of a local map of the environment, facilitating effective localization of the robot and obstacles. This approach would contribute to safer navigation in unknown environments by aiding the robot in avoiding obstacles.
+- **Navigation Algorithm Improvement:** Instead of relying on a straightforward navigation algorithm like BUG0, exploring alternatives such as SLAM (Simultaneous Localization and Mapping) techniques such as Gmapping, Hector SLAM, etc, could significantly enhance our robot's capabilities. SLAM enables the creation of a local map of the environment, facilitating effective localization of the robot and obstacles. This approach would contribute to safer navigation in unknown environments by aiding the robot in avoiding obstacles.
 
 <a name="Planning-Strategy-Enhancement"></a>
 - **Planning Strategy Enhancement:** Moving beyond a basic planning algorithm that follows a predetermined sequence of markers, we can introduce more sophisticated criteria. Considering factors like the distance from the marker during the search process could improve efficiency and conserve the robot's time and energy. Additionally, transitioning from an offline planner to an online one allows for adaptability to real-time changes in the environment, enabling the system to handle more complex missions effectively.
