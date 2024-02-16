@@ -142,9 +142,9 @@ def main():
 
     rospy.init_node('go_to_point')
 
-    pub = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
-    sub_odom = rospy.Subscriber('/odom', Odometry, clbk_odom)
-    sub_kill = rospy.Subscriber("/kill_nodes", killAll, clbk_kill)
+    pub = rospy.Publisher('/cmd_vel', Twist, queue_size=1) #send velcity commands
+    sub_odom = rospy.Subscriber('/odom', Odometry, clbk_odom) # From Rosbots odometry
+    sub_kill = rospy.Subscriber("/kill_nodes", killAll, clbk_kill) #kill all nodes
     srv = rospy.Service('go_to_point_switch', SetBool, go_to_point_switch)
 
     rate = rospy.Rate(20)
